@@ -12,6 +12,20 @@ module binary_gray(in,out);
 endmodule
 
 
+module gray_binary(in,out);
+  input  [4:0] in;
+  output  [4:0] out;
+  
+
+  assign out[4]=in[4];
+  assign out[3]=out[4]^in[3];
+  assign out[2]=out[3]^in[2];
+  assign out[1]=out[2]^in[1];
+  assign out[0]=out[1]^in[0];
+  
+endmodule
+
+
 
 module dff(reset,clk,in,out);
   
@@ -44,7 +58,7 @@ module sync(reset,in,clk,out);
   dff d0(reset,clk,ptr,out1);
   dff d1(reset,clk,out1,out2);
   
-  assign out=out2;
+  gray_binary gb0(out2,out);
   
   
   
